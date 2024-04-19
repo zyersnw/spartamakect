@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>물건 등록하기</h2>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="title">제목 :</label>
+    <input type="text" id="title" name="title">
+    <br>
+    <label for="description">설명 :</label>
+    <textarea id="description" name="description" cols="30" rows="10"></textarea>
+    <br>
+    <label for="price">가격 :</label>
+    <input type="text" id="price" name="price">
+    <br>
+    <label for="image">이미지 :</label>
+    <input type="file" id="image" name="image">
+    <br>
+    <button type="submit">작성하기</button>
+</form>
+
+{% if item.image %}
+<img src="{{ item.image.url }}" alt="Item Image">
+{% endif %}
+{% endblock content %}

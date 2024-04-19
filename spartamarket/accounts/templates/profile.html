@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ user.username }}의 프로필</h1>
+    <p>가입일: {{ user.date_joined }}</p>
+    
+    <h2>등록한 물품들</h2>
+    <ul>
+        {% for item in items_registered %}
+            <li>{{ item.title }}</li>
+        {% empty %}
+            <li>등록한 물품이 없습니다.</li>
+        {% endfor %}
+    </ul>
+    
+    <h2>찜한 물품들</h2>
+    <ul>
+        {% for item in items_favorited %}
+            <li>{{ item.title }}</li>
+        {% empty %}
+            <li>찜한 물품이 없습니다.</li>
+        {% endfor %}
+    </ul>
+    
+    <h3>팔로우 및 팔로워</h3>
+    <p>팔로우: {{ following_count }}</p>
+    <p>팔로워: {{ followers_count }}</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="user_id" value="{{ user.id }}">
+        <button type="submit">
+            {% if followed %}
+                언팔로우
+            {% else %}
+                팔로우
+            {% endif %}
+        </button>
+    </form>
+{% endblock %}

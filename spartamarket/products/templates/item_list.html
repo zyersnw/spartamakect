@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p><a href="{% url 'item_create' %}">글 작성하기</a></p>
+    {% for item in items %}
+        <h2>{{item.pk}}.  {{ item.title }}</h2>
+        {% if item.image %}
+        <img src="{{ item.image.url }}" alt="{{ item.title }} 이미지">
+        {% endif %}
+        <p>가격: ${{ item.price }}</p>
+        <p>좋아요 수: {{ item.like_set.count }}</p>
+        <p>찜하기 수: {{ item.favorite_set.count }}</p>
+        <p>게시 시간: {{ item.created_at }}</p>
+        <a href="{% url 'item_detail' item.id %}">자세히 보기</a>
+        <hr>
+    {% endfor %}
+{% endblock content %}

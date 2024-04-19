@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>스파르타마켓</h1>
+<p><a href="{% url 'signup' %}">회원가입</a></p>
+{% if user.is_authenticated %}
+    <h4>{{ user.username }}님,로그인 하셨습니다. 스파르타 중고거래를 이용해보세요!</h4>
+    <p><a href="{% url 'item_list' %}">스파르타 중고거래 하러가기</a></p>
+    <p><a href="{% url 'profile' user.id %}">내 프로필</a></p>
+    <p><a href="{% url 'logout' %}">로그아웃</a></p>
+{% else %}
+    <h4>로그인 하시면 스파르타 중고거래 이용가능합니다.</h4>
+    <p><a href="{% url 'login' %}">로그인</a></p>
+    {% endif %}
+{% endblock content %}
